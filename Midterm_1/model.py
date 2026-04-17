@@ -5,7 +5,7 @@ from mesa.datacollection import DataCollector
 
 class SchellingModel(Model):
     ## Define initiation, requiring all needed parameter inputs
-    def __init__(self, width = 30, height = 30, density = 0.7, desired_share_alike = 0.5, group_one_share = 0.7, radius = 1, seed = None):
+    def __init__(self, width = 30, height = 30, density = 0.7, group_one_share = 0.7, radius = 1, seed = None):
         ## Inherit seed trait from parent class and ensure seed is integer
         if seed is not None:
             seed = int(seed)
@@ -14,7 +14,10 @@ class SchellingModel(Model):
         self.width = width
         self.height = height
         self.density = density
-        self.desired_share_alike = desired_share_alike
+        
+        # Remove "desired_share_alike value", because agents have their individual value.
+        # self.desired_share_alike = desired_share_alikea
+        
         self.group_one_share = group_one_share
         self.radius = radius
         ## Create grid
@@ -43,7 +46,12 @@ class SchellingModel(Model):
     ## Define a step: reset global happiness tracker, agents move in random order, collect data
     def step(self):
         self.happy = 0
-        self.agents.shuffle_do("move")
+
+        # Change this function into "step", because agents now do both "learn" and "move" in one step.
+        self.agents.shuffle_do("step")
+        # Here, I keep shuffle_do("step") insted of using do("learn") and do("move") sequentially,
+        # to simulate the synchronous interaction.
+
         self.datacollector.collect(self)
         ## Run model until all agents are happy
         self.running = self.happy < len(self.agents)

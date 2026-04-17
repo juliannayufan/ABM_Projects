@@ -46,14 +46,16 @@ model_params = {
         "max": 1,
         "step": 0.01,
     },
-    "desired_share_alike": {
-        "type": "SliderFloat",
-        "value": 0.5,
-        "label": "Desired Share Alike",
-        "min": 0,
-        "max": 1,
-        "step": 0.01,
-    },
+
+# Remove "desired_share_alike" in GUI
+#    "desired_share_alike": {
+#        "type": "SliderFloat",
+#        "value": 0.5,
+#        "label": "Desired Share Alike",
+#        "min": 0,
+#        "max": 1,
+#        "step": 0.01,
+#    },
     "group_one_share": {
         "type": "SliderFloat",
         "value": 0.7,
